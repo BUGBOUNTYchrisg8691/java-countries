@@ -76,6 +76,8 @@ public class CountryController
 		List<Country> cList = new ArrayList<>();
 		countryRepos.findAll().iterator().forEachRemaining(cList::add);
 		
+		
+		
 		Country country = new Country("Test", 0, 0, 0);
 		for (Country c : cList)
 		{
@@ -106,4 +108,18 @@ public class CountryController
 	}
 	
 	// Stretch - /population/median
+	@GetMapping(value = "/population/median", produces = "application/json")
+	public ResponseEntity<?> getPopulationMedian()
+	{
+		List<Country> cList = new ArrayList<>();
+		countryRepos.findAll().iterator().forEachRemaining(cList::add);
+		
+		Country country = new Country("Test", 0, 0, 0);
+		cList.sort((c1, c2) -> (int)(c1.getPopulation() - c2.getPopulation()));
+		if (cList.size() % 2 == 1)
+		{
+			return new ResponseEntity<>(cList.get((cList.size() - 1) / 2), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(country, HttpStatus.OK);
+	}
 }
