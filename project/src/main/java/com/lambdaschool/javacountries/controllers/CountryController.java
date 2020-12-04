@@ -76,17 +76,15 @@ public class CountryController
 		List<Country> cList = new ArrayList<>();
 		countryRepos.findAll().iterator().forEachRemaining(cList::add);
 		
-		
-		
-		Country country = new Country();
+		Country returnCountry = new Country();
 		for (Country c : cList)
 		{
-			if (country.getPopulation() == 0 || country.getPopulation() > c.getPopulation())
+			if (returnCountry.getName() == null || returnCountry.getPopulation() > c.getPopulation())
 			{
-				country = c;
+				returnCountry = c;
 			}
 		}
-		return new ResponseEntity<>(country, HttpStatus.OK);
+		return new ResponseEntity<>(returnCountry, HttpStatus.OK);
 	}
 	
 	// /population/max
@@ -96,15 +94,15 @@ public class CountryController
 		List<Country> cList = new ArrayList<>();
 		countryRepos.findAll().iterator().forEachRemaining(cList::add);
 		
-		Country country = new Country();
+		Country returnCountry = new Country();
 		for (Country c : cList)
 		{
-			if (country.getPopulation() == 0 || country.getPopulation() < c.getPopulation())
+			if (returnCountry.getName() == null || returnCountry.getPopulation() < c.getPopulation())
 			{
-				country = c;
+				returnCountry = c;
 			}
 		}
-		return new ResponseEntity<>(country, HttpStatus.OK);
+		return new ResponseEntity<>(returnCountry, HttpStatus.OK);
 	}
 	
 	// Stretch - /population/median
