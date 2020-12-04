@@ -76,15 +76,18 @@ public class CountryController
 		List<Country> cList = new ArrayList<>();
 		countryRepos.findAll().iterator().forEachRemaining(cList::add);
 		
-		Country returnCountry = new Country();
-		for (Country c : cList)
-		{
-			if (returnCountry.getName() == null || returnCountry.getPopulation() > c.getPopulation())
-			{
-				returnCountry = c;
-			}
-		}
-		return new ResponseEntity<>(returnCountry, HttpStatus.OK);
+//		Country returnCountry = new Country();
+//		for (Country c : cList)
+//		{
+//			if (returnCountry.getName() == null || returnCountry.getPopulation() > c.getPopulation())
+//			{
+//				returnCountry = c;
+//			}
+//		}
+//		return new ResponseEntity<>(returnCountry, HttpStatus.OK);
+		
+		cList.sort((c1, c2) -> (int)(c1.getPopulation() - c2.getPopulation()));
+		return new ResponseEntity<>(cList.get(0), HttpStatus.OK);
 	}
 	
 	// /population/max
@@ -94,15 +97,18 @@ public class CountryController
 		List<Country> cList = new ArrayList<>();
 		countryRepos.findAll().iterator().forEachRemaining(cList::add);
 		
-		Country returnCountry = new Country();
-		for (Country c : cList)
-		{
-			if (returnCountry.getName() == null || returnCountry.getPopulation() < c.getPopulation())
-			{
-				returnCountry = c;
-			}
-		}
-		return new ResponseEntity<>(returnCountry, HttpStatus.OK);
+//		Country returnCountry = new Country();
+//		for (Country c : cList)
+//		{
+//			if (returnCountry.getName() == null || returnCountry.getPopulation() < c.getPopulation())
+//			{
+//				returnCountry = c;
+//			}
+//		}
+//		return new ResponseEntity<>(returnCountry, HttpStatus.OK);
+		
+		cList.sort((c1, c2) -> (int)(c2.getPopulation() - c1.getPopulation()));
+		return new ResponseEntity<>(cList.get(0), HttpStatus.OK);
 	}
 	
 	// Stretch - /population/median
