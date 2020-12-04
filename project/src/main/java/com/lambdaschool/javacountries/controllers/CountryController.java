@@ -118,12 +118,19 @@ public class CountryController
 		List<Country> cList = new ArrayList<>();
 		countryRepos.findAll().iterator().forEachRemaining(cList::add);
 		
-		Country country = new Country();
 		cList.sort((c1, c2) -> (int)(c1.getPopulation() - c2.getPopulation()));
-		if (cList.size() % 2 == 1)
-		{
-			return new ResponseEntity<>(cList.get((cList.size() - 1) / 2), HttpStatus.OK);
-		}
-		return new ResponseEntity<>(country, HttpStatus.OK);
+		return new ResponseEntity<>(cList.get((cList.size() - 1) / 2), HttpStatus.OK);
+		
+//		Country country = new Country();
+//		if (cList.size() % 2 == 1)
+//		{
+//			return new ResponseEntity<>(cList.get((cList.size() - 1) / 2), HttpStatus.OK);
+//		}
+//		else if (cList.size() % 2 == 0)
+//		{
+//			double median = cList.get(cList.size() / 2).getPopulation() + cList.get(cList.size() / 2 - 1).getPopulation();
+//			return new ResponseEntity<>(median, HttpStatus.OK);
+//		}
+//		return new ResponseEntity<>(country, HttpStatus.OK);
 	}
 }
