@@ -78,7 +78,7 @@ public class CountryController
 		
 		
 		
-		Country country = new Country("Test", 0, 0, 0);
+		Country country = new Country();
 		for (Country c : cList)
 		{
 			if (country.getPopulation() == 0 || country.getPopulation() > c.getPopulation())
@@ -96,7 +96,7 @@ public class CountryController
 		List<Country> cList = new ArrayList<>();
 		countryRepos.findAll().iterator().forEachRemaining(cList::add);
 		
-		Country country = new Country("Test", 0, 0, 0);
+		Country country = new Country();
 		for (Country c : cList)
 		{
 			if (country.getPopulation() == 0 || country.getPopulation() < c.getPopulation())
@@ -114,7 +114,7 @@ public class CountryController
 		List<Country> cList = new ArrayList<>();
 		countryRepos.findAll().iterator().forEachRemaining(cList::add);
 		
-		Country country = new Country("Test", 0, 0, 0);
+		Country country = new Country();
 		cList.sort((c1, c2) -> (int)(c1.getPopulation() - c2.getPopulation()));
 		if (cList.size() % 2 == 1)
 		{
